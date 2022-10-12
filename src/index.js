@@ -1,12 +1,14 @@
 import { createStore } from "redux";
 
 const reducer = (state = 0, action) => {
-    if(action.type === 'INCREMENT') {
-        return state + 1;
-    } else if(action.type === 'DECREMENT') {
-        return state - 1;
+    switch(action.type){
+        case 'INCREMENT':
+            return state + action.payload;
+        case 'DECREMENT':
+            return state - action.payload;
+        default:
+            return state;
     }
-    return state;
 }
 
 const store = createStore(reducer);
@@ -16,13 +18,16 @@ store.subscribe(() => {
 });
 
 store.dispatch({
-    type: 'INCREMENT'
+    type: 'INCREMENT',
+    payload: 1
 })
 
 store.dispatch({
-    type: 'INCREMENT'
+    type: 'INCREMENT',
+    payload: 5
 })
 
 store.dispatch({
-    type: 'DECREMENT'
+    type: 'DECREMENT',
+    payload: 2
 })
